@@ -7,7 +7,7 @@ description: Yazılım geliştirme, teknoloji ve dijital içerik üretimi
 author: Fatih Çelen
 
 # Build settings
-timezone: "Turkey/Istanbul"
+timezone: "Europe/Istanbul"
 markdown: kramdown
 highlighter: rouge
 
@@ -26,7 +26,6 @@ exclude:
   - index.md
   - tags.html
   - feed.xml
-  - 404.html
   - _posts/
   - _layouts/
   - _includes/
