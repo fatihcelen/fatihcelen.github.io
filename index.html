@@ -301,6 +301,23 @@
             animation-delay: 0.4s;
         }
     </style>
+    
+    <!-- Inline script to prevent FOUC (Flash of Unstyled Content) -->
+    <script>
+        // Apply theme before page renders
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            let theme = 'light';
+            
+            if (savedTheme) {
+                theme = savedTheme;
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                theme = 'dark';
+            }
+            
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
 <body>
     <!-- Theme Toggle Button -->
@@ -364,27 +381,8 @@
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
         
-        // Check for saved theme preference or default to system preference
-        function getPreferredTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                return savedTheme;
-            }
-            
-            // Check system preference
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                return 'dark';
-            }
-            
-            return 'light';
-        }
-        
-        // Set theme
-        function setTheme(theme) {
-            htmlElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            
-            // Update icon
+        // Update icon based on current theme
+        function updateIcon(theme) {
             if (theme === 'dark') {
                 themeIcon.className = 'fas fa-sun';
             } else {
@@ -392,9 +390,16 @@
             }
         }
         
-        // Initialize theme
-        const currentTheme = getPreferredTheme();
-        setTheme(currentTheme);
+        // Set theme
+        function setTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateIcon(theme);
+        }
+        
+        // Initialize icon based on current theme
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        updateIcon(currentTheme);
         
         // Toggle theme on button click
         themeToggle.addEventListener('click', () => {
@@ -408,7 +413,8 @@
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
                 // Only auto-switch if user hasn't manually set a preference
                 if (!localStorage.getItem('theme')) {
-                    setTheme(e.matches ? 'dark' : 'light');
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    setTheme(newTheme);
                 }
             });
         }
