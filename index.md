@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Fatih Çelen
-subtitle: 
 ---
 
 Merhaba! Ben Fatih Çelen. Yazılım geliştirme, teknoloji ve dijital içerik üretimi alanlarında çalışmalar yapıyorum.
