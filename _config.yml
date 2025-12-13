@@ -23,9 +23,6 @@ exclude:
   - docs/
   - beautiful-jekyll-theme.gemspec
   - staticman.yml
-  - index.md
-  - tags.html
-  - feed.xml
   - _posts/
   - _layouts/
   - _includes/
