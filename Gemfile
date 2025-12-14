@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
-# This site uses standalone HTML and doesn't require Jekyll
-# The following dependencies are kept for backwards compatibility
+# Note: This site now uses .nojekyll to skip Jekyll processing
+# Jekyll dependencies below are kept only for local development/testing if needed
 
 gem "jekyll", "~> 4.3.0"
 
